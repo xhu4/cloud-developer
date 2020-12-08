@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e5b24cba-ddda-43be-9676-aab4e28b5742",
+		"_postman_id": "f3e047ac-b9d0-4fe9-bd69-f871d8a1db11",
 		"name": "cloud-cdnd-c2-final",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,91 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2216eb2f-450e-44fb-a963-1bdaf0ad1d97",
+						"id": "1ee72148-4ab3-46b1-8846-05c6b7297670",
+						"exec": [
+							"pm.test(\"Status is ok\", function () {",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Content-Type header is image/jpeg\", function () {",
+							"    pm.response.to.be.header(\"Content-Type\", \"image/jpeg\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{HOST}}/filteredimage?image_url=https://api.time.com/wp-content/uploads/2019/03/kitten-report.jpg",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://api.time.com/wp-content/uploads/2019/03/kitten-report.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filteredimage no url",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "daeda1cc-3ac6-4043-a2e7-e1e5c3a0c5c6",
+						"exec": [
+							"pm.test(\"Status is ok\", function () {",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Content-Type header is image/jpeg\", function () {",
+							"    pm.response.to.be.header(\"Content-Type\", \"image/jpeg\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{HOST}}/filteredimage?image_url=https://api.time.com/wp-content/uploads/2019/03/kitten-report.jpg",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://api.time.com/wp-content/uploads/2019/03/kitten-report.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filteredimage invalid url",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "518e85dc-692e-4177-9886-c1fc10bc204e",
 						"exec": [
 							"pm.test(\"Status is ok\", function () {",
 							"    pm.response.to.be.ok;",
@@ -52,7 +136,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "fb55315b-1712-49a2-9d49-056f9affde59",
+				"id": "1404740e-c528-4539-94b0-46500df1c9fb",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -62,7 +146,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "58f4c727-1633-47af-bfa7-5d09f6327c05",
+				"id": "0300b372-d157-40c7-ac08-b4886bb0f782",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -72,9 +156,9 @@
 	],
 	"variable": [
 		{
-			"id": "4bbc52f7-dbba-4c45-8566-e46648013265",
+			"id": "03e24c3a-70b2-4dcb-9eaf-99ced6b6c83d",
 			"key": "HOST",
-			"value": "udagram-hu-fillter-dev-dev.us-west-1.elasticbeanstalk.com"
+			"value": "localhost:8082"
 		}
 	],
 	"protocolProfileBehavior": {}

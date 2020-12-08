@@ -33,9 +33,16 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
     if (!image_url) {
       return res.status(400).send("image url is required");
     }
-    let filtered_img = await filterImageFromURL(image_url);
-    res.sendFile(filtered_img);
-    res.on("finish", ()=>deleteLocalFiles([filtered_img]));
+    filterImageFromURL(image_url).then(filtered_img => {
+      res.sendFile(filtered_img); res.on("finish", () => deleteLocalFiles([filtered_img]))
+    }).catch(
+      reason => {
+        if (reason.code === "ENOENT") {
+          res.status(404).send("Cannot find given image");
+        } else {
+          res.status(422).send("Failed to filter image");
+        }
+      });
   });
 
   //! END @TODO1

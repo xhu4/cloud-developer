@@ -28,19 +28,19 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-  app.get("/filteredimage/", async (req: Request, res: Response) => {
-    let { image_url } = req.query;
+  app.get("/filteredimage/", async (request: Request, response: Response) => {
+    let { image_url } = request.query;
     if (!image_url) {
-      return res.status(400).send("image url is required");
+      return response.status(400).send("image url is required");
     }
     filterImageFromURL(image_url).then(filtered_img => {
-      res.sendFile(filtered_img); res.on("finish", () => deleteLocalFiles([filtered_img]))
+      response.sendFile(filtered_img); response.on("finish", () => deleteLocalFiles([filtered_img]))
     }).catch(
       reason => {
         if (reason.code === "ENOENT") {
-          res.status(404).send("Cannot find given image");
+          response.status(404).send("Cannot find given image");
         } else {
-          res.status(422).send("Failed to filter image");
+          response.status(422).send("Failed to filter image");
         }
       });
   });
@@ -49,8 +49,8 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/", async (req, res) => {
-    res.send("try GET /filteredimage?image_url={{}}")
+  app.get("/", async (_: Request, response: Response) => {
+    response.send("try GET /filteredimage?image_url={{}}")
   });
 
 
